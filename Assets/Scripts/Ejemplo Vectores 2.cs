@@ -5,7 +5,7 @@ using UnityEngine;
 public class EjemploVectores2 : MonoBehaviour
 {
     [SerializeField] Vector3 direccionGiro = new Vector3(0, 5, 0), direccion = new Vector3(0, 0.5f, 0);
-    [SerializeField] float velocidadGiro = 7, velocidad = 50000.0f;
+    [SerializeField] float velocidadGiro = 7, velocidad;
     float timer;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class EjemploVectores2 : MonoBehaviour
     void Update()
     {
         timer += 1 * Time.deltaTime;
-        if (timer < 0.1f)
+        if (timer < 0.5f)
         {
             transform.Rotate(direccionGiro * velocidadGiro * Time.deltaTime);
             transform.Translate(direccion.normalized * velocidad * Time.deltaTime, Space.World);
