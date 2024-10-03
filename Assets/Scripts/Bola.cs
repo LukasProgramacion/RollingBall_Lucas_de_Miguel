@@ -6,11 +6,14 @@ public class Bola : MonoBehaviour
 {
     [SerializeField] Vector3 direccion = new Vector3 (0, 0, 0);
     [SerializeField] float velocidad;
+    [SerializeField] float fuerzaSalto, fuerzaX;
+
+    Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -22,8 +25,18 @@ public class Bola : MonoBehaviour
         
             //direccion = new Vector3(h, 0, v);
 
-            transform.position += new Vector3(h, 0, v) * velocidad * Time.deltaTime;
+           // ESTO ES MOVIMIENTO CON KINEMATIC NO RESPETA FISICA SE JODEN COSAS
+           //transform.position += new Vector3(h, 0, v) * velocidad * Time.deltaTime;
         
+        
+        
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(0, fuerzaSalto, 0, ForceMode.Impulse);
+        }
+        
+        rb.AddForce(h, 0,v , ForceMode.Force);
         
     }
 }
