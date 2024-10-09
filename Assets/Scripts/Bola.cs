@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Bola : MonoBehaviour
@@ -9,7 +10,9 @@ public class Bola : MonoBehaviour
     [SerializeField] float fuerzaSalto, fuerzaX;
     [SerializeField] int vida;
     private float h;
-    private float v; 
+    private float v;
+    private int puntuacion;
+    [SerializeField] TMP_Text textoPuntacion, textoVida;
 
     Rigidbody rb;
 
@@ -53,12 +56,15 @@ public class Bola : MonoBehaviour
     {
         if (other.gameObject.tag == "Colecionable")
         {
+            puntuacion += 5;
+            textoPuntacion.SetText("Puntacion: " + puntuacion);
             Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Trampa"))
         {
             vida -= 10;
+            textoVida.SetText("Vida: " + vida);
             if (vida <= 0)
             {
                 Destroy(gameObject);
