@@ -11,8 +11,15 @@ public class Bola : MonoBehaviour
     [SerializeField] int vida;
     private float h;
     private float v;
+
+    [SerializeField] float distanciaDeteccionSuelo;
+    [SerializeField] LayerMask queEsSuelo;
+
     private int puntuacion;
+    
     [SerializeField] TMP_Text textoPuntacion, textoVida;
+    
+    [SerializeField] GameObject camaraPrincipal, camaraCenital;
 
     Rigidbody rb;
 
@@ -40,11 +47,20 @@ public class Bola : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(0, fuerzaSalto, 0, ForceMode.Impulse);
+            if(DetectarSuelo() == true)
+            {
+                rb.AddForce(0, fuerzaSalto, 0, ForceMode.Impulse);
+            }
         }
         
         
         
+    }
+
+    bool DetectarSuelo()
+    {
+        bool resultado = Physics.Raycast(transform.position, new Vector3(0, -1, 0), distanciaDeteccionSuelo, queEsSuelo);
+        return resultado;
     }
         
     private void FixedUpdate()
@@ -54,7 +70,7 @@ public class Bola : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Colecionable")
+        if (other.gameObject.CompareTag("Colecionable"))
         {
             puntuacion += 5;
             textoPuntacion.SetText("Puntacion: " + puntuacion);
@@ -70,7 +86,21 @@ public class Bola : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        
-        
+
+        if (other.gameObject.CompareTag("ParedCambiadora"))
+        {
+            camaraPrincipal.SetActive(false);
+            camaraCenital.SetActive(true);
+
+        }
+        if (other.gameObject.CompareTag("ParedCambiadora2"))
+        {
+            camaraCenital.SetActive(false);
+            camaraPrincipal.SetActive(true);
+            
+
+        }
+
+
     }
 }
