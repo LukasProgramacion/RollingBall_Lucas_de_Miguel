@@ -15,11 +15,16 @@ public class Bola : MonoBehaviour
     [SerializeField] float distanciaDeteccionSuelo;
     [SerializeField] LayerMask queEsSuelo;
 
+    [SerializeField] AudioClip sonidoMoneda;
+    [SerializeField] AudioManager manager;
+    
     private int puntuacion;
     
     [SerializeField] TMP_Text textoPuntacion, textoVida;
     
     [SerializeField] GameObject camaraPrincipal, camaraCenital;
+
+    
 
     Rigidbody rb;
 
@@ -72,6 +77,7 @@ public class Bola : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Colecionable"))
         {
+            manager.ReproducirSonido(sonidoMoneda);
             puntuacion += 5;
             textoPuntacion.SetText("Puntacion: " + puntuacion);
             Destroy(other.gameObject);
