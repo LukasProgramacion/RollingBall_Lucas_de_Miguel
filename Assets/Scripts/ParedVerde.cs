@@ -17,7 +17,7 @@ public class ParedVerde : MonoBehaviour
     void Update()
     {
         timer += 1 * Time.deltaTime;
-        if (timer < 0.5f)
+        if (timer < 1.5f)
         {
             transform.Rotate(direccionGiro * velocidadGiro * Time.deltaTime);
             transform.Translate(direccion.normalized * velocidad * Time.deltaTime, Space.World);

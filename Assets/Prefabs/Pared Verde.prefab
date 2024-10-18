@@ -58,7 +58,7 @@ MonoBehaviour:
   direccionGiro: {x: 0, y: 0, z: 0}
   direccion: {x: 0.6, y: 0, z: 0}
   velocidadGiro: 0
-  velocidad: 0.85
+  velocidad: 0.5
 --- !u!23 &6996517376731226009
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8402668270077686890}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0a7603fa196e72c49aa223d140fac7b6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
