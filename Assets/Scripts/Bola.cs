@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bola : MonoBehaviour
 {
@@ -91,6 +92,12 @@ public class Bola : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+
+        if (other.gameObject.CompareTag("VacioMorir"))
+        {
+            vida = 0;
+            SceneManager.LoadScene(1);
         }
 
         if (other.gameObject.CompareTag("ParedCambiadora"))

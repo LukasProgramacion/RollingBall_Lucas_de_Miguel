@@ -9,6 +9,7 @@ TagManager:
   - ParedCambiadora
   - ParedCambiadora2
   - Suelo
+  - VacioMorir
   layers:
   - Default
   - TransparentFX
