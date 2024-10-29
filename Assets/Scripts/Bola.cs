@@ -91,6 +91,7 @@ public class Bola : MonoBehaviour
             if (vida <= 0)
             {
                 Destroy(gameObject);
+                SceneManager.LoadScene(1);
             }
         }
 
