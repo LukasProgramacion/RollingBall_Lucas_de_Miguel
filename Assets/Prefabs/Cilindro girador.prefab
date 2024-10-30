@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -5630509179156618756}
   - component: {fileID: 3528105633283432114}
   - component: {fileID: 7208135128962130182}
-  - component: {fileID: 8242658539820061184}
+  - component: {fileID: -1927408299528093420}
   m_Layer: 0
   m_Name: Cilindro girador
   m_TagString: Untagged
@@ -56,9 +56,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2f50f7ebda4ae41ac28aada1ca8008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadRotacion: 90
-  fuerzaRodillo: 50
-  direccionRotacion: {x: 0, y: 500, z: 0}
+  fuerzaRodillo: 80
+  direccionRotacion: {x: 0, y: 1, z: 0}
 --- !u!23 &3528105633283432114
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -123,7 +122,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &8242658539820061184
+--- !u!54 &-1927408299528093420
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,8 +130,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6943419379342914215}
   serializedVersion: 4
-  m_Mass: 3
-  m_Drag: 1
+  m_Mass: 1e+9
+  m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -148,5 +147,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 110
+  m_Constraints: 94
   m_CollisionDetection: 0

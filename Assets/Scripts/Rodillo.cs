@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rodillo : MonoBehaviour
 {
-    [SerializeField] int velocidadRotacion, fuerzaRodillo;
+    [SerializeField] int fuerzaRodillo;
     [SerializeField] Vector3 direccionRotacion;
 
     Rigidbody rb;
@@ -12,7 +12,7 @@ public class Rodillo : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddTorque(direccionRotacion * fuerzaRodillo, ForceMode.Impulse);
+        rb.AddTorque(direccionRotacion * fuerzaRodillo, ForceMode.VelocityChange);
         
 
     }
