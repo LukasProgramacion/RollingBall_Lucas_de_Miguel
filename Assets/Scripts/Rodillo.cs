@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Rodillo : MonoBehaviour
 {
-    [SerializeField] int fuerzaRodillo;
+    [SerializeField] float fuerzaRodillo;
     [SerializeField] Vector3 direccionRotacion;
-
+    
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.AddTorque(direccionRotacion * fuerzaRodillo, ForceMode.VelocityChange);
+        
         
 
     }

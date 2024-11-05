@@ -10,6 +10,9 @@ TagManager:
   - ParedCambiadora2
   - Suelo
   - VacioMorir
+  - Acelerador
+  - Decelerador
+  - Meta
   layers:
   - Default
   - TransparentFX

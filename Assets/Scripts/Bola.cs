@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,10 +21,15 @@ public class Bola : MonoBehaviour
     [SerializeField] AudioManager manager;
     
     private int puntuacion;
-    
-    [SerializeField] TMP_Text textoPuntacion, textoVida;
+    private int muertes;
+
+    public Vector3 respawnPosition = new Vector3 (-0.025f,1.277f, -25.351f);
+
+    [SerializeField] TMP_Text textoPuntacion, textoVida, textoMuertes;
     
     [SerializeField] GameObject camaraPrincipal, camaraCenital;
+
+    private float impulsoAcelerador = 2f;
 
     
 
@@ -33,6 +39,7 @@ public class Bola : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
@@ -59,8 +66,15 @@ public class Bola : MonoBehaviour
             }
         }
         
+     
         
-        
+    }
+
+    private void TepearASpawn()
+    {
+        transform.position = respawnPosition;
+        camaraPrincipal.SetActive(true);
+        vida = 100;
     }
 
     bool DetectarSuelo()
@@ -90,15 +104,19 @@ public class Bola : MonoBehaviour
             textoVida.SetText("Vida: " + vida);
             if (vida <= 0)
             {
-                Destroy(gameObject);
-                SceneManager.LoadScene(1);
+                muertes++;
+                textoMuertes.SetText("Muertes: " + muertes);
+                TepearASpawn();
+               
             }
         }
 
         if (other.gameObject.CompareTag("VacioMorir"))
         {
             vida = 0;
-            SceneManager.LoadScene(1);
+            muertes++;
+            textoMuertes.SetText("Muertes: " + muertes);
+            TepearASpawn();
         }
 
         if (other.gameObject.CompareTag("ParedCambiadora"))
@@ -114,6 +132,23 @@ public class Bola : MonoBehaviour
             
 
         }
+        if (other.gameObject.CompareTag("Acelerador"))
+        {
+            rb.AddForce(0, 0, impulsoAcelerador, ForceMode.Impulse);
+
+
+        }
+        if (other.gameObject.CompareTag("Decelerador"))
+        {
+            rb.AddForce(0, 0, -impulsoAcelerador, ForceMode.Impulse);
+
+
+        }
+        if(other.gameObject.CompareTag("Meta"))
+        {
+            //Hacer escena victoria
+        }
+
 
 
     }

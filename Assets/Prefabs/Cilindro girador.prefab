@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2f50f7ebda4ae41ac28aada1ca8008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuerzaRodillo: 80
+  fuerzaRodillo: 0.5
   direccionRotacion: {x: 0, y: 1, z: 0}
 --- !u!23 &3528105633283432114
 MeshRenderer:
