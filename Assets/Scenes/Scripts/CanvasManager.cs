@@ -17,4 +17,9 @@ public class CanvasManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void HojaInstrucciones()
+    {
+        SceneManager.LoadScene(4);
+    }
+
 }

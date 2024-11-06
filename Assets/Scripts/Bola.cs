@@ -17,7 +17,7 @@ public class Bola : MonoBehaviour
     [SerializeField] float distanciaDeteccionSuelo;
     [SerializeField] LayerMask queEsSuelo;
 
-    [SerializeField] AudioClip sonidoMoneda;
+    [SerializeField] AudioClip sonidoMoneda, sondioAcelerador, sonidoDecelerador;
     [SerializeField] AudioManager manager;
     
     private int puntuacion;
@@ -65,6 +65,11 @@ public class Bola : MonoBehaviour
                 rb.AddForce(0, fuerzaSalto, 0, ForceMode.Impulse);
             }
         }
+
+        if (muertes >= 10)
+        {
+            SceneManager.LoadScene(3);
+        }
         
      
         
@@ -72,9 +77,11 @@ public class Bola : MonoBehaviour
 
     private void TepearASpawn()
     {
+        velocidad = 0f;
         transform.position = respawnPosition;
         camaraPrincipal.SetActive(true);
         vida = 100;
+        velocidad = 1f;
     }
 
     bool DetectarSuelo()
@@ -135,18 +142,19 @@ public class Bola : MonoBehaviour
         if (other.gameObject.CompareTag("Acelerador"))
         {
             rb.AddForce(0, 0, impulsoAcelerador, ForceMode.Impulse);
-
+            manager.ReproducirSonido(sondioAcelerador);
 
         }
         if (other.gameObject.CompareTag("Decelerador"))
         {
             rb.AddForce(0, 0, -impulsoAcelerador, ForceMode.Impulse);
+            manager.ReproducirSonido(sonidoDecelerador);
 
 
         }
         if(other.gameObject.CompareTag("Meta"))
         {
-            //Hacer escena victoria
+            SceneManager.LoadScene(2);
         }
 
 
