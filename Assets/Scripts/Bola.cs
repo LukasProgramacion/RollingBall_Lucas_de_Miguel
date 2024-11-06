@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class Bola : MonoBehaviour
 {
     [SerializeField] Vector3 direccion = new Vector3 (0, 0, 0);
-    [SerializeField] float velocidad;
     [SerializeField] float fuerzaSalto, fuerzaX;
     [SerializeField] int vida;
     private float h;
@@ -77,11 +76,13 @@ public class Bola : MonoBehaviour
 
     private void TepearASpawn()
     {
-        velocidad = 0f;
+        rb.isKinematic = true;
+        rb.velocity = Vector3.zero;
         transform.position = respawnPosition;
+
+        rb.isKinematic = false;
         camaraPrincipal.SetActive(true);
         vida = 100;
-        velocidad = 1f;
     }
 
     bool DetectarSuelo()
@@ -101,18 +102,18 @@ public class Bola : MonoBehaviour
         {
             manager.ReproducirSonido(sonidoMoneda);
             puntuacion += 5;
-            textoPuntacion.SetText("Puntacion: " + puntuacion);
+            textoPuntacion.SetText(": " + puntuacion);
             Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Trampa"))
         {
             vida -= 10;
-            textoVida.SetText("Vida: " + vida);
+            textoVida.SetText(": " + vida);
             if (vida <= 0)
             {
                 muertes++;
-                textoMuertes.SetText("Muertes: " + muertes);
+                textoMuertes.SetText(": " + muertes);
                 TepearASpawn();
                
             }
@@ -122,7 +123,7 @@ public class Bola : MonoBehaviour
         {
             vida = 0;
             muertes++;
-            textoMuertes.SetText("Muertes: " + muertes);
+            textoMuertes.SetText(": " + muertes);
             TepearASpawn();
         }
 
