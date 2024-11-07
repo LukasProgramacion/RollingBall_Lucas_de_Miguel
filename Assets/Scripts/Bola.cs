@@ -16,7 +16,7 @@ public class Bola : MonoBehaviour
     [SerializeField] float distanciaDeteccionSuelo;
     [SerializeField] LayerMask queEsSuelo;
 
-    [SerializeField] AudioClip sonidoMoneda, sondioAcelerador, sonidoDecelerador;
+    [SerializeField] AudioClip sonidoMoneda, sondioAcelerador, sonidoDecelerador, sonidoPerderVida, sonidoMorir, sonidoRespawnear;
     [SerializeField] AudioManager manager;
     
     private int puntuacion;
@@ -24,7 +24,7 @@ public class Bola : MonoBehaviour
 
     public Vector3 respawnPosition = new Vector3 (-0.025f,1.277f, -25.351f);
 
-    [SerializeField] TMP_Text textoPuntacion, textoVida, textoMuertes;
+    [SerializeField] TMP_Text textoPuntacion, textoVida, textoMuertes, textoResumen;
     
     [SerializeField] GameObject camaraPrincipal, camaraCenital;
 
@@ -38,6 +38,7 @@ public class Bola : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        //textoResumen.gameObject.SetActive(false);
         
     }
 
@@ -67,6 +68,7 @@ public class Bola : MonoBehaviour
 
         if (muertes >= 10)
         {
+            manager.ReproducirSonido(sonidoMorir);
             SceneManager.LoadScene(3);
         }
         
@@ -82,7 +84,8 @@ public class Bola : MonoBehaviour
 
         rb.isKinematic = false;
         camaraPrincipal.SetActive(true);
-        vida = 100;
+        
+        manager.ReproducirSonido(sonidoRespawnear);
     }
 
     bool DetectarSuelo()
@@ -110,21 +113,27 @@ public class Bola : MonoBehaviour
         {
             vida -= 10;
             textoVida.SetText(": " + vida);
+            manager.ReproducirSonido(sonidoPerderVida);
             if (vida <= 0)
             {
-                muertes++;
+                muertes+=2;
                 textoMuertes.SetText(": " + muertes);
+                
                 TepearASpawn();
-               
+                vida = 100;
+                textoVida.SetText(": " + vida);
+
+
             }
         }
 
         if (other.gameObject.CompareTag("VacioMorir"))
         {
-            vida = 0;
+            vida -= 10;
             muertes++;
             textoMuertes.SetText(": " + muertes);
             TepearASpawn();
+            textoVida.SetText(": " + vida);
         }
 
         if (other.gameObject.CompareTag("ParedCambiadora"))
@@ -155,7 +164,13 @@ public class Bola : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Meta"))
         {
+            
             SceneManager.LoadScene(2);
+            /*
+            DontDestroyOnLoad(textoMuertes);
+            textoResumen.gameObject.SetActive(true);
+            textoResumen.SetText("ACABASTE CON: " + puntuacion + "PUNTOS Y: " +  muertes + " MUERTES");
+            */
         }
 
 
