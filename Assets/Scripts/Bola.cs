@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Bola : MonoBehaviour
 {
@@ -30,7 +31,10 @@ public class Bola : MonoBehaviour
 
     private float impulsoAcelerador = 2f;
 
-    
+    public Image blackScreen;
+    public float velocidadFadeOut = 0.01f;
+
+
 
     Rigidbody rb;
 
@@ -71,9 +75,20 @@ public class Bola : MonoBehaviour
             manager.ReproducirSonido(sonidoMorir);
             SceneManager.LoadScene(3);
         }
-        
-     
-        
+
+        Color color = blackScreen.color;
+        color.a -= velocidadFadeOut;
+
+        if (color.a <= 0)
+        {
+            color.a = 0;
+            blackScreen.gameObject.SetActive(false);
+        }
+
+        blackScreen.color = color;
+
+
+
     }
 
     private void TepearASpawn()
