@@ -145,10 +145,23 @@ public class Bola : MonoBehaviour
         if (other.gameObject.CompareTag("VacioMorir"))
         {
             vida -= 10;
+            textoVida.SetText(": " + vida);
+            TepearASpawn();
             muertes++;
             textoMuertes.SetText(": " + muertes);
-            TepearASpawn();
-            textoVida.SetText(": " + vida);
+            if (vida <= 0)
+            {
+                muertes += 2;
+                textoMuertes.SetText(": " + muertes);
+
+                TepearASpawn();
+                vida = 100;
+                textoVida.SetText(": " + vida);
+
+
+            }
+            
+            
         }
 
         if (other.gameObject.CompareTag("ParedCambiadora"))
